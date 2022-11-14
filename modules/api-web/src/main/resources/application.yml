@@ -1,0 +1,75 @@
+# core
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+  datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/billing_core
+    username: billing
+    password: abc123
+
+logging:
+  level:
+    tech.jannotti.billing.core: INFO
+    org.hibernate.SQL: INFO
+    org.springframework.ws.client.MessageTracing.sent: INFO
+    org.springframework.ws.client.MessageTracing.received: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{36} - %msg%n"
+
+liquibase:
+  enabled: true
+  change-log: classpath:liquibase/changelog.xml
+  contexts: dev
+
+core:
+  invoice:
+    alerting:
+      daysBeforeExpirationToAlert: 5
+  subscription:
+    invoice:
+      daysBeforeExpirationToCreate: 10
+  httpClient:
+    pooling:
+      max:
+        total: 100
+        perRoute: 10
+      request:
+        timeout: 1000
+    socket:
+      buffer:
+        size: 1024
+    keyStore:
+      path: /httpClient/keystore.p12
+      type: PKCS12
+      password: "36W%Ml6aNv#f"
+  email:
+    connector: emailConnectors.sendGrid
+    from: noreply@jannotti.tech
+    sendGrid:
+      url: https://api.sendgrid.com/v3/mail/send
+      apiKey: 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
+  notification:
+    deliveryDelay: 3000 # 3 segundos
+    requestTimeout: 30000 # 30 segundos
+    retryLimit: 3
+    retryDelay: 3600000 # 1 hora
+
+# api
+
+server:
+  port: 8080
+  
+api:
+  jwt:
+    secret: "36W%Ml6aNv#f"
+    expiration: 5 # horas
+
+sentry:
+  enabled: false
+  dsn: https://3177119f39394e5bb8092e159c93ba71@sentry.io/1235434
+  environment: local

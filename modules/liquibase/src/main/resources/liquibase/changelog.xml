@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+    logicalFilePath="changelog.xml">
+
+    <changeSet author="billing" id="clearCheckSums" runAlways="true" context="dev">
+        <sql>update databasechangelog SET md5sum = NULL</sql>
+    </changeSet>
+
+    <changeSet author="billing" id="0.0.tag">
+        <tagDatabase tag="0.0" />
+    </changeSet>
+
+    <!-- versao 1.0 -->
+
+    <include file="liquibase/changesets/01.00/01.00.01-create-schema-base.sql"/>
+    <include file="liquibase/changesets/01.00/01.00.02-create-procedures-base.xml"/>
+    <include file="liquibase/changesets/01.00/01.00.03-insert-base-data.sql"/>
+    <include file="liquibase/changesets/01.00/01.00.04-insert-br-citites.sql"/>
+    <include file="liquibase/changesets/01.00/01.00.05-create-schema-banking_bb.sql"/>
+    <include file="liquibase/changesets/01.00/01.00.06-insert-banking_bb-data.sql"/>
+    <include file="liquibase/changesets/01.00/01.00.07-create-collection-tables.sql"/>
+
+    <!-- tests -->
+    <include file="liquibase/changesets/contexts/tests/01.00.51-insert-test-data.sql"/>
+    <!-- dev -->
+    <include file="liquibase/changesets/contexts/dev/01.00.52-insert-test-data.sql"/>
+    <!-- sandbox -->
+    <include file="liquibase/changesets/contexts/sandbox/01.00.52-insert-test-data.sql"/>    
+
+    <changeSet author="billing" id="1.0.tag">
+        <tagDatabase tag="1.0" />
+    </changeSet>
+
+
+    <!-- versao 1.1 -->
+
+   <include file="liquibase/changesets/01.01/01.01.01-create-procedure-token.xml"/>
+
+    <!-- revisao de tabelas bancarias -->
+    <include file="liquibase/changesets/01.01/01.01.02-review-base-banking-tables.sql"/>
+    <include file="liquibase/changesets/contexts/tests/01.01.51-update-banking-tables-data.sql"/>
+    <include file="liquibase/changesets/01.01/01.01.03-finish-base-banking-review.sql"/>
+
+    <include file="liquibase/changesets/01.01/01.01.04-review-bb-banking-tables.sql"/>
+
+    <!-- criacao de plano tarifario -->
+    <include file="liquibase/changesets/01.01/01.01.05-create-billing-plan-table.sql"/>
+    <include file="liquibase/changesets/contexts/tests/01.01.52-insert-billing-plan-data.sql"/>
+    <include file="liquibase/changesets/01.01/01.01.06-finish-billing-plan-creation.sql"/>
+
+    <include file="liquibase/changesets/01.01/01.01.07-create-transfer-tables.sql"/>
+    <include file="liquibase/changesets/01.01/01.01.08-review-payment-table.sql"/>
+    <include file="liquibase/changesets/01.01/01.01.09-create-market-account-tables.sql"/>
+
+    <!-- separacao de tabelas por nivel -->
+    <include file="liquibase/changesets/01.01/01.01.10-split-user-tables.sql"/>
+    <include file="liquibase/changesets/contexts/tests/01.01.53-update-splited-user-data.sql"/>
+    <include file="liquibase/changesets/01.01/01.01.11-finish-user-tables-split.sql"/>
+
+    <!-- tests -->
+    <include file="liquibase/changesets/contexts/tests/01.01.54-insert-dealer-accounts.sql"/>
+
+    <changeSet author="billing" id="1.1.tag">
+        <tagDatabase tag="1.1" />
+    </changeSet>
+    
+    <!-- suporte a registro online de boleto -->
+    <include file="liquibase/changesets/01.02/01.02.01-add-bb-billet-registry-support.sql"/>
+    <include file="liquibase/changesets/contexts/tests/01.02.51-update-bb-billet-registry-data.sql"/>
+    <include file="liquibase/changesets/01.02/01.02.02-finish-bb-billet-registry-support.sql"/>
+    
+    <include file="liquibase/changesets/01.02/01.02.03-create-application-tables.sql"/>
+    <include file="liquibase/changesets/01.02/01.02.04-remove-city-references.sql"/>
+    <include file="liquibase/changesets/01.02/01.02.05-create-help-video-tables.sql"/>
+    <include file="liquibase/changesets/01.02/01.02.06-translate-bb-billet-registry-errors.sql"/>
+    <include file="liquibase/changesets/01.02/01.02.07-create-alerting-tables.sql"/>
+
+    <!-- tests -->
+    <include file="liquibase/changesets/contexts/tests/01.02.52-insert-application-data.sql"/>
+    <include file="liquibase/changesets/contexts/tests/01.02.53-insert-help-video-data.sql"/>
+
+    <changeSet author="billing" id="1.2.tag">
+        <tagDatabase tag="1.2" />
+    </changeSet>
+    
+    <include file="liquibase/changesets/01.03/01.03.01-add-bank-discharge-ignored-status.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.02-add-billing-plan-columns.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.03-add-transfer-fee-columns.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.04-fix-bankbillet-cancelation-issues.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.05-add-market-withdraw-alerts.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.06-fix-bb-billet-issue-date-timezone.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.07-remove-cnab-billet-registry-support.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.08-add-update-invoice-result-codes.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.09-add-notification-undelivered-status.sql"/>
+    <include file="liquibase/changesets/01.03/01.03.10-drop-bank-remittance-unique.sql"/>
+
+    <!-- tests -->    
+    <include file="liquibase/changesets/contexts/tests/01.03.51-update-company-fees-data.sql"/>
+    
+    <changeSet author="billing" id="1.3.tag">
+        <tagDatabase tag="1.3" />
+    </changeSet>
+    
+    <include file="liquibase/changesets/01.04/01.04.01-create-schema-banking_santander.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.02-insert-banking_santander-data.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.03-remove-bank-billet-timezone.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.04-review-bb-cnab400-translate-tables.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.05-alter-bank-billet-number-columns.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.06-rename-provider-to-company.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.07-create-subscription-tables.sql"/>
+
+    <!-- tests -->
+    <include file="liquibase/changesets/contexts/tests/01.04.51-insert-santander-test-data.sql"/>
+    <!-- dev -->
+    <include file="liquibase/changesets/contexts/dev/01.04.52-insert-santander-test-data.sql"/>
+    <!-- sandbox -->
+    <include file="liquibase/changesets/contexts/sandbox/01.04.52-insert-santander-test-data.sql"/>
+    
+    <include file="liquibase/changesets/01.04/01.04.08-bank-billet-expired-payment.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.09-split-bb-bank-account-agreements.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.10-bank-billet-registry-cost-columns.sql"/>
+
+    <!-- tests -->
+    <include file="liquibase/changesets/contexts/tests/01.04.52-update-bank-billet-registry-cost.sql"/>
+    
+    <include file="liquibase/changesets/01.04/01.04.11-add-billet-agreement-columns.sql"/>
+    <!-- tests -->
+    <include file="liquibase/changesets/contexts/tests/01.04.53-update-billets-agreement-data.sql"/>
+    <include file="liquibase/changesets/01.04/01.04.12-finish-billet-agreement-columns-add.sql"/>
+    
+    <include file="liquibase/changesets/01.04/01.04.13-remove-bank-billet-interest-frequency.sql"/>
+
+</databaseChangeLog>

@@ -1,0 +1,227 @@
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <import resource="classpath:banking/base-file-mapping.xml" />
+
+  <!-- Layouts de Arquivo de Remessa -->
+  <stream name="cnab400-remessa" format="fixedlength">
+    <parser>
+      <property name="recordTerminator" value="\r\n" />
+    </parser>
+    
+    <record name="header"
+      class="tech.jannotti.billing.core.banking.bb.exchange.records.cnab400.remessa.HeaderRemessa">
+      
+      <field name="identificacaoRegistro"            length="1" rid="true" literal="0"/>
+      <field name="tipoOperacao"                     length="1"   padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="identificacaoExtensoTipoOperacao" length="7"   padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="identificacaoTipoServico"         length="2"   padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="identificacaoExtensoTipoServico"  length="8"   padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="complementoRegistro1"             length="7"   padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="prefixoAgencia"                   length="4"   padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="dvPrefixoAgencia"                 length="1"   padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="numeroContaCorrenteCedente"       length="8"   padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="dvNumeroContaCorrenteCedente"     length="1"   padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="complementoRegistro2"             length="6"   padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="nomeCedente"                      length="30"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="codigoNomeBanco"                  length="18"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="dataGravacao"                     length="6"   format="ddMMyy" default="000000"/>
+      <field name="sequenciaRemessa"                 length="7"   padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="complementoRegistro3"             length="22"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="numeroConvenioLider"              length="7"   padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="complementoRegistro4"             length="258" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="sequencialRegistro"               length="6"   padding="0" align="right" default="0" keepPadding="true"/>
+    </record>
+    
+    <record name="detalhe"
+      class="tech.jannotti.billing.core.banking.bb.exchange.records.cnab400.remessa.DetalheRemessa">
+
+      <field name="identificacaoRegistro"              length="1" rid="true" literal="7"/>
+      <field name="tipoInscricaoCedente"               length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="numeroCpfCnpjCedente"               length="14" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="prefixoAgencia"                     length="4"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="dvPrefixoAgencia"                   length="1"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="numeroContaCorrenteCedente"         length="8"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="dvNumContaCorCedente"               length="1"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="numeroConvenioCobrancaCedente"      length="7"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="codigoControleEmpresa"              length="25" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="nossoNumero"                        length="17" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="numeroPrestacao"                    length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="grupoValor"                         length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="complementoRegistro"                length="3"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="indicativoMensagemSacadorAvalista"  length="1"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="prefixoTitulo"                      length="3"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="variacaoCarteira"                   length="3"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="contaCaucao"                        length="1"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="numeroBordero"                      length="6"  padding="0" align="right" default="0" keepPadding="true"/>    
+      <field name="tipoCobranca"                       length="5"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="carteiraCobranca"                   length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="comando"                            length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="numeroTituloAtribuidoCedente"       length="10" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="dataVencimento"                     length="6"  format="ddMMyy" default="000000"/>
+      <field name="valorTitulo"                        length="13" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="numeroBanco"                        length="3"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="prefixoAgenciaCobradora"            length="4"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="dvPrefixoAgenciaCobradora"          length="1"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="especieTitulo"                      length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="aceiteTitulo"                       length="1"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="dataEmissao"                        length="6"  format="ddMMyy" default="000000"/>
+      <field name="instrucaoCodificada1"               length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="instrucaoCodificada2"               length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="jurosMoraDiaAtraso"                 length="13" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="dataLimitiConcessaoDesconto"        length="6"  format="ddMMyy" default="000000"/>
+      <field name="valorDesconto"                      length="13" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="valorIOFQtdeUnidadeVariavel"        length="13" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="valorAbatimento"                    length="13" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="tipoInscricaoSacado"                length="2"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="numeroCnpjCpfSacado"                length="14" padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="nomeSacado"                         length="37" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="complementoRegistro1"               length="3"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="enderecoSacado"                     length="40" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="bairroSacado"                       length="12" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="cepSacado"                          length="8"  padding="0" align="right" default="0" keepPadding="true"/>
+      <field name="cidadeSacado"                       length="15" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="ufSacado"                           length="2"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="observacoesMensagemSacadorAvalista" length="40" padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="numeroDiasProtesto"                 length="2"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="complementoRegistro2"               length="1"  padding=" " align="left"  default=" " keepPadding="true"/>
+      <field name="sequencialRegistro"                 length="6"  padding="0" align="right" default="0" keepPadding="true"/>
+   </record>
+
+    <record name="trailler"
+      class="tech.jannotti.billing.core.banking.bb.exchange.records.cnab400.remessa.TraillerRemessa"> 
+    
+      <field name="identificacaoRegistro" length="1" rid="true" literal="9"/>
+      <field name="complementoRegistro"   length="393" padding=" " align="left" default=" " keepPadding="true"/>
+      <field name="sequencialRegistro"    length="6"   padding="0" align="right" default="0" keepPadding="true"/>
+    </record>
+  </stream>    
+    
+  <!-- Layouts de Arquivo de Retorno -->
+  <stream name="cnab400-retorno" format="fixedlength">
+    <parser>
+      <property name="recordTerminator" value="\r\n" />
+    </parser>    
+    
+    <record name="header"
+      class="tech.jannotti.billing.core.banking.bb.exchange.records.cnab400.retorno.HeaderRetorno">
+      
+      <field name="identificacaoRegistro"           length="1" rid="true" literal="0"/>
+      <field name="tipoOperacao"                    length="1"  />
+      <field name="identificacaoTipoOperacao"       length="7"  />
+      <field name="identificacaoTipoServico"        length="2"  />
+      <field name="identificacaoExtensoTipoServico" length="8"  />
+      <field name="complementoRegistro1"            length="7"  />
+      <field name="prefixoAgencia"                  length="4"  />
+      <field name="dvPrefixoAgencia"                length="1"  />
+      <field name="numeroContaCorrente"             length="8"  />
+      <field name="dvNumeroContaCorrenteCedente"    length="1"  />
+      <field name="zeros"                           length="6"  />
+      <field name="nomeCedente"                     length="30" />
+      <field name="codigoNomeBanco"                 length="18" />
+      <field name="dataGravacao"                    length="6" format="ddMMyy"/>
+      <field name="sequencialRetorno"               length="7"  />
+      <field name="complementoRegistro2"            length="42" />
+      <field name="numeroConvenio"                  length="7"  />
+      <field name="complementoRegistro3"            length="238"/>
+      <field name="sequencialRegistro"              length="6"  />
+    </record>
+    
+    <record name="detalhe"
+      class="tech.jannotti.billing.core.banking.bb.exchange.records.cnab400.retorno.DetalheRetorno">  
+      
+      <field name="identificacaoRegistro"                  length="1" rid="true" literal="7"/>
+      <field name="zeros1"                                 length="2"  />
+      <field name="zeros2"                                 length="14" />
+      <field name="prefixoAgencia"                         length="4"  />
+      <field name="dvPrefixoAgencia"                       length="1"  />
+      <field name="numeroContaCorrenteCedente"             length="8"  />
+      <field name="dvNumeroContaCorrenteCedente"           length="1"  />
+      <field name="numeroConvenioCobrancaCedente"          length="7"  />
+      <field name="numeroControleParticipante"             length="25" />
+      <field name="nossoNumero"                            length="17" />
+      <field name="tipoCobranca"                           length="1"  />
+      <field name="tipoCobrançaEspecificoComando72"        length="1"  />
+      <field name="diasParaCalculo"                        length="4"  />
+      <field name="naturezaRecebimento"                    length="2"  />
+      <field name="prefixoTitulo"                          length="3"  />
+      <field name="variacaoCarteira"                       length="3"  />
+      <field name="contaCaucao"                            length="1"  />
+      <field name="taxaDesconto"                           length="5"  />    
+      <field name="taxaIOF"                                length="5"  />
+      <field name="branco1"                                length="1"  />
+      <field name="carteira"                               length="2"  />
+      <field name="comando"                                length="2"  />
+      <field name="dataLiquidacao"                         length="6"  format="ddMMyy"/>
+      <field name="numeroTituloDadoPeloCedente"            length="10" />
+      <field name="brancos1"                               length="20" />
+      <field name="dataVencimento"                         length="6"  format="ddMMyy"/>
+      <field name="valorTitulo"                            length="13" />
+      <field name="codigoBancoRecebedor"                   length="3"  />
+      <field name="prefixoAgenciaRecebedora"               length="4"  />
+      <field name="dvPrefixoAgenciaRecebedora"             length="1"  />
+      <field name="especieTitulo"                          length="2"  />
+      <field name="dataCredito"                            length="6"  format="ddMMyy"/>
+      <field name="valorTarifa"                            length="7"  />
+      <field name="outrasDespesas"                         length="13" />
+      <field name="jurosDesconto"                          length="13" />
+      <field name="iofDesconto"                            length="13" />
+      <field name="valorAbatimento"                        length="13" />
+      <field name="descontoConcedido"                      length="13" />
+      <field name="valorRecibo"                            length="13" />
+      <field name="jurosMora"                              length="13" />
+      <field name="outrosRecebimentos"                     length="13" />
+      <field name="abatimentoAproveitadoSacado"            length="13" />
+      <field name="valorLancamento"                        length="13" />
+      <field name="indicativoDebitoCredito"                length="1"  />
+      <field name="indicadorValor"                         length="1"  />
+      <field name="valorAjuste"                            length="12" />
+      <field name="brancos2"                               length="1"  />
+      <field name="brancos3"                               length="9"  />
+      <field name="zeros3"                                 length="7"  />
+      <field name="zeros4"                                 length="9"  />
+      <field name="zeros5"                                 length="7"  />
+      <field name="zeros6"                                 length="9"  />
+      <field name="zeros7"                                 length="7"  />
+      <field name="zeros8"                                 length="9"  />
+      <field name="indicativoAutorizacaoLiquidacaoParcial" length="1"  />
+      <field name="branco2"                                length="1"  />
+      <field name="canalPagamentoTituloUtilizadoSacado"    length="2"  />
+      <field name="sequencialRegistro"                     length="6"  />       
+   </record>
+   
+   <record name="trailler"
+      class="tech.jannotti.billing.core.banking.bb.exchange.records.cnab400.retorno.TraillerRetorno">
+
+      <field name="identificacaoRegistro"        length="1" rid="true" literal="9"/>
+      <field name="campo2"                       length="1"   />
+      <field name="campo01"                      length="2"   />
+      <field name="campo001"                     length="3"   />
+      <field name="brancos1"                     length="10"  />
+      <field name="quantidadeTitulos1"           length="8"   />
+      <field name="valorTotal1"                  length="14"  />
+      <field name="numeroAviso1"                 length="8"   />
+      <field name="brancos2"                     length="10"  />
+      <field name="quantidadeTitulos2"           length="8"   />
+      <field name="valorTotal2"                  length="14"  />
+      <field name="numeroAviso2"                 length="8"   />
+      <field name="brancos3"                     length="10"  />
+      <field name="quantidadeTitulos3"           length="8"   />
+      <field name="valorTotal3"                  length="14"  />
+      <field name="numeroAviso3"                 length="8"   />
+      <field name="brancos4"                     length="10"  />
+      <field name="quantidadeTitulos4"           length="8"   />
+      <field name="valorTotal4"                  length="14"  />
+      <field name="numeroAviso4"                 length="8"   />
+      <field name="brancos5"                     length="50"  />
+      <field name="quantidadeTitulos5"           length="8"   />
+      <field name="valorTotal5"                  length="14"  />
+      <field name="numeroAviso5"                 length="8"   />
+      <field name="brancos6"                     length="147" />
+      <field name="sequencialRegistro"           length="6"   />
+    </record>
+
+  </stream>
+
+</beanio>

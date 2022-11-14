@@ -1,0 +1,9 @@
+.classpath
+.project
+.springBeans
+pom.xml.releaseBackup
+release.properties
+/.idea
+/.settings
+/dist
+/target

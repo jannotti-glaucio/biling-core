@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+<changeSet author="billing" id="1.00.02" dbms="postgresql">
+<comment>Criacao de procedures do schema base</comment>
+
+<createProcedure>
+CREATE FUNCTION base.insert_result_code(
+  response_code_key character,
+  response_code_name character varying,
+  response_code_success boolean,
+  language_code character,
+  response_code_message character varying,
+  group_key character,
+  http_status integer
+) RETURNS void
+LANGUAGE sql
+AS $function$
+  INSERT INTO base.result_code(key, name, success, result_code_group_id, http_status) values
+    (response_code_key, response_code_name, response_code_success,
+    (SELECT id FROM base.result_code_group WHERE key = group_key), http_status);
+
+  INSERT INTO base.result_code_message(result_code_id, language_id, message) VALUES
+    ((SELECT id FROM base.result_code WHERE key = response_code_key),
+    (SELECT id FROM base.language WHERE code = language_code),
+    response_code_message
+  );
+$function$
+</createProcedure>
+
+</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/billing_core_main
+
+logging:
+  level:
+    tech.jannotti.billing.core: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework.ws.client.MessageTracing.sent: TRACE
+    org.springframework.ws.client.MessageTracing.received: TRACE

@@ -1,0 +1,23 @@
+<settings>
+    <pluginGroups>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>http://sonar.billing.net:9000</sonar.host.url>
+            </properties>
+        </profile>
+    </profiles>
+    <servers>
+        <server>
+             <id>bitbucket</id>
+            <username>$USER_EMAIL</username>
+            <password>$ENCRIPTED_PASSWORD</password>
+        </server>
+    </servers>
+</settings>

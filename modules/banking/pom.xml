@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>tech.jannotti.billing</groupId>
+        <artifactId>billing-core</artifactId>
+        <version>1.3-SNAPSHOT</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-bb-registro</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>                            
+                            <packageName>tech.jannotti.billing.core.banking.bb.soap.stub.registro</packageName>
+                            <sources>
+                                <source>${basedir}/src/main/resources/banking/bb/schema/RegistroCobranca.wsdl</source>
+                            </sources>
+                            <outputDirectory>${project.build.directory}/generated-sources/jaxb/bb-registro</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-santander-ticket</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <packageName>tech.jannotti.billing.core.banking.santander.soap.stub.ticket</packageName>
+                            <sources>
+                                <source>${basedir}/src/main/resources/banking/santander/schema/TicketEndpointService.wsdl</source>
+                            </sources>
+                            <outputDirectory>${project.build.directory}/generated-sources/jaxb/santander-ticket</outputDirectory>                                                        
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-santander-cobranca</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <packageName>tech.jannotti.billing.core.banking.santander.soap.stub.cobranca</packageName>
+                            <sources>
+                                <source>${basedir}/src/main/resources/banking/santander/schema/CobrancaEndpointService.wsdl</source>
+                            </sources>
+                            <outputDirectory>${project.build.directory}/generated-sources/jaxb/santander-cobranca</outputDirectory>                                                        
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <artifactId>billing-core-banking</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>tech.jannotti.billing</groupId>
+            <artifactId>billing-core-base</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com.caelum.stella</groupId>
+            <artifactId>caelum-stella-boleto</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

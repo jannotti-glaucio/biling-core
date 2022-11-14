@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+
+	<fontFamily name="Arial">
+		<normal>banking/jasper/fonts/Arial.ttf</normal>
+		<bold>banking/jasper/fonts/Arial Bold.ttf</bold>
+		<italic>banking/jasper/fonts/Arial Italic.ttf</italic>
+		<boldItalic>banking/jasper/fonts/Arial Bold Italic.ttf</boldItalic>
+		<pdfEmbedded>true</pdfEmbedded>
+		<exportFonts>
+			<export key="net.sf.jasperreports.html">Arial, Helvetica, sans-serif</export>
+			<export key="net.sf.jasperreports.xhtml">Arial, Helvetica, sans-serif</export>
+		</exportFonts>
+	</fontFamily>
+
+</fontFamilies>

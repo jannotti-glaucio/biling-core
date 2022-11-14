@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config> 
+
+<templates>
+
+<template language="pt-BR" name="bank-billet-invoice-send">  
+  <id>d-37a79435e8a84229bfc018c96d628239</id>
+  <attachment.name>boleto.pdf</attachment.name>
+</template>
+
+<template language="pt-BR" name="bank-billet-collection-invoice-expiring">  
+  <id>d-ea97391a818a4b40b44eef6f8590a032</id>
+  <attachment.name>boleto.pdf</attachment.name>
+</template>
+
+<template language="pt-BR" name="market-withdraw-request">  
+  <id>d-6f0b28d9d12145fa8ea7014be867b643</id>
+</template>
+
+<template language="pt-BR" name="market-withdraw-deny">  
+  <id>d-50c00a9a6a464eb8be3e2826f0850e49</id>
+</template>
+
+<template language="pt-BR" name="market-withdraw-release">  
+  <id>d-996a90268de649c7b3594218d3719223</id>
+</template>
+
+</templates>
+
+</config>
